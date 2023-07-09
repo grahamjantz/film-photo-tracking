@@ -1,0 +1,30 @@
+App
+    header 
+        (camera selection as nav bar)
+    main
+        dropdown (select film roll)
+        photos
+            (1-36 side scrolling to select photo number)
+        settings
+            film
+            lens
+            f stop
+            shutter speed
+            exposure compensation
+    save to db
+    
+
+film_rolls = [
+    {
+        film: 'fujifilm 400 colour',
+        lens: '50mm',
+        photos: [
+            {
+                exposure-comp: '',
+                f-stop: 1,
+                shutter-speed: ''
+            }
+        ],
+    },
+
+]
