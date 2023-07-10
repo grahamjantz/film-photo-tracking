@@ -16,14 +16,14 @@ App
 
 film_rolls = [
     {
-        film: 'fujifilm 400 colour',
+        film: 'fujifilm_400_colour',
         lens: '50mm',
         photos: [
             {
-                exposure-comp: '',
-                f-stop: 1,
-                shutter-speed: ''
-            }
+                exposure_comp: '',
+                f_stop: 1,
+                shutter_speed: ''
+            },
         ],
     },
 

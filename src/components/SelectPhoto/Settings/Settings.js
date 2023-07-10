@@ -1,8 +1,10 @@
 import React from 'react'
 
-const Settings = () => {
+const Settings = ({ photo }) => {
+  // console.log(photo)
   return (
-    <div>Settings</div>
+    <div>
+    </div>
   )
 }
 
