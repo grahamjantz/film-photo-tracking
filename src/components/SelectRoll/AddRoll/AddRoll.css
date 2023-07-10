@@ -1,0 +1,22 @@
+.add-roll {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem 0;
+}
+
+.add-roll label {
+    font-size: 2rem;
+}
+
+.add-roll input[type='text'] {
+    font-size: 2rem;
+    padding: 1rem 2rem;
+}
+
+.add-roll input[type='submit']  {
+    font-size: 2rem;
+    padding: 1rem;
+}

@@ -15,11 +15,10 @@ export const generateId = () => {
 function App() {
 
   const [data, setData] = useState([])
-  const [roll, setRoll] = useState({})
   const [currentRollId, setCurrentRollId] = useState('')
   const [currentPhotoId, setCurrentPhotoId] = useState(1)
-  const [photo, setPhoto] = useState({})
   const [addRollActive, setAddRollActive] = useState(false)
+  const [addPhotoActive, setAddPhotoActive] = useState(false)
 
 
   const dbRef = doc(db, 'cameras', 'pentax_me_super')
@@ -31,12 +30,14 @@ function App() {
   //       'id': generateId(),
   //       'photos': [
   //         {
+  //           'subject': 'Maddy & Frank',
   //           'id': generateId(),
   //           'exposure_comp': '1x',
   //           'f_stop': 2,
   //           'shutter_speed': '1/2000s'
   //         },
   //         {
+  //           'subject': 'Plant',
   //           'id': generateId(),
   //           'exposure_comp': '1/4x',
   //           'f_stop': 11,
@@ -50,12 +51,14 @@ function App() {
   //       'id': generateId(),
   //       'photos': [
   //         {
+  //           'subject': 'Fence',
   //           'id': generateId(),
   //           'exposure_comp': '1x',
   //           'f_stop': 2,
   //           'shutter_speed': '1/2000s'
   //         },
   //         {
+  //           'subject': 'Waterslides @ Henderson',
   //           'id': generateId(),
   //           'exposure_comp': '2x',
   //           'f_stop': 2,
@@ -69,12 +72,14 @@ function App() {
   //       'id': generateId(),
   //       'photos': [
   //         {
+  //           'subject': 'Maddy & Asher',
   //           'id': generateId(),
   //           'exposure_comp': '1/4x',
   //           'f_stop': 22,
   //           'shutter_speed': '1/250'
   //         },
   //         {
+  //           'subject': 'Bridge @ Henderson',
   //           'id': generateId(),
   //           'exposure_comp': '1x',
   //           'f_stop': 11,
@@ -108,7 +113,7 @@ function App() {
     })
   },[data, currentRollId])
 
-  // console.log(currentPhotoId)
+  // console.log(addPhotoActive)
 
   const handleSubmitAddRoll = async (e, filmType, lens) => {
     e.preventDefault()
@@ -147,6 +152,8 @@ function App() {
         addRollActive={addRollActive}
         setAddRollActive={setAddRollActive}
         handleSubmitAddRoll={handleSubmitAddRoll}
+        addPhotoActive={addPhotoActive}
+        setAddPhotoActive={setAddPhotoActive}
       />
       <Footer />
     </div>

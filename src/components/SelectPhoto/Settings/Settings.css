@@ -2,4 +2,21 @@
     width: 80%;
     height: fit-content;
     border: 1px solid red;
+    font-weight: lighter;
+}
+
+.photo-settings h3 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.photo-settings h4 {
+    font-weight: bolder;
+}
+
+.photo-settings h4 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }

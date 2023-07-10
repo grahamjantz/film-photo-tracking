@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import './SelectPhoto.css'
 
-const SelectPhoto = ({ data, currentRollId, currentPhotoId, setCurrentPhotoId }) => {
+import { FaPlusCircle } from 'react-icons/fa'
+import AddPhoto from './AddPhoto/AddPhoto'
+
+const SelectPhoto = ({ data, currentRollId, currentPhotoId, setCurrentPhotoId, addPhotoActive, setAddPhotoActive }) => {
 
   const [localRollData, setLocalRollData] = useState({})
 
@@ -16,22 +19,30 @@ const SelectPhoto = ({ data, currentRollId, currentPhotoId, setCurrentPhotoId })
   },[data, currentRollId])
 
   return (
-    <div className='select-photo'>
-      {
-        localRollData.photos ? (
-          localRollData.photos.map(photo => {
-              return (
-                <div 
-                  key={photo.id}
-                  className={photo.id === currentPhotoId ? 'active': ''}
-                  onClick={() => setCurrentPhotoId(Number(photo.id))}
-                >
-                  #{localRollData.photos.indexOf(photo) + 1} (F{photo.f_stop} {photo.shutter_speed} {photo.exposure_comp}EF)
-                </div>
-              )
-            })
-        ) : ''
-      }
+    <div className='select-photo-master-container'>
+      <div className='select-photo-container'>
+        <div className='add-photo-button' onClick={() => addPhotoActive === false? setAddPhotoActive(true) : setAddPhotoActive(false)}>
+          <FaPlusCircle />
+        </div>
+        <div className='select-photo'>
+          {
+            localRollData.photos ? (
+              localRollData.photos.map(photo => {
+                  return (
+                    <div 
+                      key={photo.id}
+                      className={photo.id === currentPhotoId ? 'active': ''}
+                      onClick={() => setCurrentPhotoId(Number(photo.id))}
+                    >
+                      #{localRollData.photos.indexOf(photo) + 1} (F{photo.f_stop} {photo.shutter_speed} {photo.exposure_comp}EF)
+                    </div>
+                  )
+                })
+            ) : ''
+          }
+        </div>
+      </div>
+      {addPhotoActive === true ? <AddPhoto /> : ''}
     </div>
   )
 }

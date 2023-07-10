@@ -25,9 +25,10 @@ const Settings = ({ data, currentRollId, currentPhotoId }) => {
             if (photo.id === currentPhotoId) {
               return (
                 <div className='photo-settings' key={photo.id}>
-                  <h4>{photo.exposure_comp}</h4>
-                  <h4>{photo.f_stop}</h4>
-                  <h4>{photo.shutter_speed}</h4>
+                  <h3><strong>{photo.subject}</strong></h3>
+                  <h4>Aperture: <strong>F{photo.f_stop}</strong></h4>
+                  <h4>Shutter Speed: <strong>{photo.shutter_speed}s</strong></h4>
+                  <h4>Exposure Comp: <strong>{photo.exposure_comp} EF</strong></h4>
                 </div>
               )
             } else {

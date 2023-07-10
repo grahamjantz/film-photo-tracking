@@ -19,7 +19,7 @@ const SelectRoll = ({ data, setCurrentRollId, handleSubmitAddRoll, addRollActive
   return (
     <div className='select-roll-master-container'>
       <div className='select-roll-container'>
-        <div className='add-roll' onClick={() => addRollActive ? setAddRollActive(false) : setAddRollActive(true)}>
+        <div className='add-roll-button' onClick={() => addRollActive ? setAddRollActive(false) : setAddRollActive(true)}>
           <FaPlusCircle />
         </div>
         <div className='select-roll'>

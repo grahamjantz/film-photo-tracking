@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import './AddRoll.css'
+
 import { generateId } from '../../../App'
 
 const AddRoll = ({ handleSubmitAddRoll }) => {

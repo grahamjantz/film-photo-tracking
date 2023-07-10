@@ -21,10 +21,12 @@ film_rolls = [
         id: generateId(),
         photos: [
             {
+                subject: '',
                 id: generateId(),
-                exposure_comp: '',
                 f_stop: 1,
-                shutter_speed: ''
+                shutter_speed: '',
+                exposure_comp: '',
+                shooting_mode: ''
             },
         ],
     },
