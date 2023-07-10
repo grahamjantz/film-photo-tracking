@@ -5,12 +5,24 @@ import SelectPhoto from '../SelectPhoto/SelectPhoto'
 import SelectRoll from '../SelectRoll/SelectRoll'
 import Settings from '../SelectPhoto/Settings/Settings'
 
-const Main = ({ data, photos, setCurrentRoll, currentPhoto, setCurrentPhoto, photo }) => {
+const Main = ({ data, currentRollId, setCurrentRollId, currentPhotoId, setCurrentPhotoId }) => {
   return (
     <div className='main'>
-      <SelectRoll data={data} setCurrentRoll={setCurrentRoll}/>
-      <SelectPhoto photos={photos} setCurrentPhoto={setCurrentPhoto}/>
-      <Settings currentPhoto={currentPhoto} photo={photo}/>
+      <SelectRoll 
+        data={data} 
+        setCurrentRollId={setCurrentRollId}
+      />
+      <SelectPhoto 
+        data={data}
+        currentRollId={currentRollId}
+        currentPhotoId={currentPhotoId}
+        setCurrentPhotoId={setCurrentPhotoId}
+      />
+      <Settings 
+        data={data}
+        currentRollId={currentRollId}
+        currentPhotoId={currentPhotoId}
+      />
     </div>
   )
 }

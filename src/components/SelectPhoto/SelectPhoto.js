@@ -1,22 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-const SelectPhoto = ({ photos, setCurrentPhoto }) => {
+const SelectPhoto = ({ data, currentRollId, currentPhotoId, setCurrentPhotoId }) => {
+
+  const [localRollData, setLocalRollData] = useState({})
+
+  useEffect(() => {
+    if (data) {
+      data.forEach(arrItem => {
+        if (arrItem.id === currentRollId) {
+          setLocalRollData(arrItem)
+        }
+      })
+    }
+  },[data, currentRollId])
+
   return (
-    <select>
+    <select value={currentPhotoId} onChange={(e) => setCurrentPhotoId(Number(e.target.value))}>
       {
-        !photos ? '' : (
-          photos.map(photo => {
-            // console.log(photo)
-            return (
-              <option key={photo.id} onClick={() => setCurrentPhoto(photo.id)}>
-                    Frame: {photo.id} |
-                    Exp: {photo.exposure_comp} |
-                    Shutter: {photo.shutter_speed} |
-                    Aperture: {photo.f_stop}
-              </option>
-            )
-          })
-        )
+        localRollData.photos ? (
+          localRollData.photos.map(photo => {
+              return (
+                <option 
+                  key={photo.id}
+                  value={photo.id}
+                >
+                  Photo #{localRollData.photos.indexOf(photo) + 1} {photo.id}
+                </option>
+              )
+            })
+        ) : ''
       }
     </select>
   )
