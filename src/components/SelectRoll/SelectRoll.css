@@ -1,16 +1,45 @@
-.select-film {
+.select-roll-master-container {
     width: 80%;
+    display: flex; 
+    flex-direction: column;
+}
+
+.select-roll-container {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
     border: 1px solid red;
+    padding-left: 1rem;
+}
+
+.add-roll {
+    font-size: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-roll svg {
+    color: green;
+}
+
+.select-roll {
+    width: 100%;
     display: flex;
     overflow-x: scroll;
     padding: 1rem;
     gap: 2rem;
 }
 
-.select-film div {
+.select-roll div {
     border: 1px solid red;
     display: flex;
     white-space: nowrap;
     padding: 0.5em;
     gap: 5px;
+}
+
+.select-roll div.active {
+    background-color: rgb(163, 77, 77);
 }

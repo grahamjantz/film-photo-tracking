@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import './SelectPhoto.css'
 
 const SelectPhoto = ({ data, currentRollId, currentPhotoId, setCurrentPhotoId }) => {
 
@@ -15,22 +16,23 @@ const SelectPhoto = ({ data, currentRollId, currentPhotoId, setCurrentPhotoId })
   },[data, currentRollId])
 
   return (
-    <select value={currentPhotoId} onChange={(e) => setCurrentPhotoId(Number(e.target.value))}>
+    <div className='select-photo'>
       {
         localRollData.photos ? (
           localRollData.photos.map(photo => {
               return (
-                <option 
+                <div 
                   key={photo.id}
-                  value={photo.id}
+                  className={photo.id === currentPhotoId ? 'active': ''}
+                  onClick={() => setCurrentPhotoId(Number(photo.id))}
                 >
-                  Photo #{localRollData.photos.indexOf(photo) + 1} {photo.id}
-                </option>
+                  #{localRollData.photos.indexOf(photo) + 1} (F{photo.f_stop} {photo.shutter_speed} {photo.exposure_comp}EF)
+                </div>
               )
             })
         ) : ''
       }
-    </select>
+    </div>
   )
 }
 

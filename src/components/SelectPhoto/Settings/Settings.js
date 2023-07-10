@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import './Settings.css'
 
 const Settings = ({ data, currentRollId, currentPhotoId }) => {
   
@@ -17,7 +18,7 @@ const Settings = ({ data, currentRollId, currentPhotoId }) => {
   // console.log(localRollData)
 
   return (
-    <div>
+    <div className='settings'>
       {
         localRollData.photos ? (
           localRollData.photos.map(photo => {
@@ -29,6 +30,8 @@ const Settings = ({ data, currentRollId, currentPhotoId }) => {
                   <h4>{photo.shutter_speed}</h4>
                 </div>
               )
+            } else {
+              return ''
             }
           })
         ) : ''

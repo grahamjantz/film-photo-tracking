@@ -18,8 +18,10 @@ film_rolls = [
     {
         film: 'fujifilm_400_colour',
         lens: '50mm',
+        id: generateId(),
         photos: [
             {
+                id: generateId(),
                 exposure_comp: '',
                 f_stop: 1,
                 shutter_speed: ''

@@ -21,3 +21,8 @@ code {
 html {
   font-size: 10px;
 }
+
+#root {
+  max-width: 100vw;
+  overflow: hidden;
+}

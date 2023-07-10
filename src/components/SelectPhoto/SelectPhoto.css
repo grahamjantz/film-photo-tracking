@@ -1,0 +1,28 @@
+.select-photo-container {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.select-photo {
+    width: 80%;
+    border: 1px solid red;
+    display: flex;
+    overflow-x: scroll;
+    padding: 1rem;
+    gap: 2rem;
+}
+
+.select-photo div {
+    border: 1px solid red;
+    display: flex;
+    white-space: nowrap;
+    padding: 0.5em;
+    gap: 5px;
+}
+
+.select-photo div.active {
+    background-color: rgb(163, 77, 77);
+}

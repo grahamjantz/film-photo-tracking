@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
-import { doc, onSnapshot, setDoc } from "firebase/firestore";
+import { arrayUnion, doc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
 
 import db from './firebaseConfig.js'
 import Header from './components/Header/Header';
@@ -19,6 +19,8 @@ function App() {
   const [currentRollId, setCurrentRollId] = useState('')
   const [currentPhotoId, setCurrentPhotoId] = useState(1)
   const [photo, setPhoto] = useState({})
+  const [addRollActive, setAddRollActive] = useState(false)
+
 
   const dbRef = doc(db, 'cameras', 'pentax_me_super')
   // setDoc(dbRef, {
@@ -108,6 +110,30 @@ function App() {
 
   // console.log(currentPhotoId)
 
+  const handleSubmitAddRoll = async (e, filmType, lens) => {
+    e.preventDefault()
+
+    let name = filmType.toLowerCase().replace(/ /g,"_")
+    console.log(name)
+    
+    if (data) {
+      if (filmType !=='' && lens !== '') {
+        const payload = {
+          film: name,
+          lens: lens,
+          id: generateId(),
+          photos: []
+        }
+        const docRef = doc(db, 'cameras', 'pentax_me_super') 
+        await updateDoc(docRef, {
+          'film_rolls': arrayUnion(payload)
+        })
+        console.log('added to firestore')
+      }
+    }
+    setAddRollActive(false)
+  }
+
   
   return (
     <div className="App">
@@ -118,6 +144,9 @@ function App() {
         setCurrentRollId={setCurrentRollId}
         currentPhotoId={currentPhotoId}
         setCurrentPhotoId={setCurrentPhotoId}
+        addRollActive={addRollActive}
+        setAddRollActive={setAddRollActive}
+        handleSubmitAddRoll={handleSubmitAddRoll}
       />
       <Footer />
     </div>

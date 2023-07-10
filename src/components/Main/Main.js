@@ -5,12 +5,15 @@ import SelectPhoto from '../SelectPhoto/SelectPhoto'
 import SelectRoll from '../SelectRoll/SelectRoll'
 import Settings from '../SelectPhoto/Settings/Settings'
 
-const Main = ({ data, currentRollId, setCurrentRollId, currentPhotoId, setCurrentPhotoId }) => {
+const Main = ({ data, currentRollId, setCurrentRollId, currentPhotoId, setCurrentPhotoId,handleSubmitAddRoll, addRollActive, setAddRollActive }) => {
   return (
     <div className='main'>
       <SelectRoll 
         data={data} 
         setCurrentRollId={setCurrentRollId}
+        addRollActive={addRollActive}
+        setAddRollActive={setAddRollActive}
+        handleSubmitAddRoll={handleSubmitAddRoll}
       />
       <SelectPhoto 
         data={data}
