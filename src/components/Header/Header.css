@@ -4,6 +4,7 @@ header {
     padding: 1rem 0;
     background-color: var(--second-yellow);
     box-shadow: 0 0 5px var(--main-brown);
+    border-radius: 0 0 10px 10px !important;
 }
 
 header h1 {
