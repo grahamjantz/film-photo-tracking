@@ -1,8 +1,10 @@
 import React from 'react'
 
-const Footer = () => {
+const Footer = ({ handleNavigate }) => {
   return (
-    <div>Footer</div>
+    <footer>
+      
+    </footer>
   )
 }
 

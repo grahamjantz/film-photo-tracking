@@ -3,10 +3,10 @@ import './Header.css'
 
 import { MdCameraRoll } from 'react-icons/md'
 
-const Header = () => {
+const Header = ({ handleNavigate }) => {
   return (
-    <header>
-      <h1><MdCameraRoll /> Film Tracker</h1>
+    <header onClick={() => handleNavigate('/')}>
+      <h1><MdCameraRoll /> Film Catalogue</h1>
     </header>
   )
 }

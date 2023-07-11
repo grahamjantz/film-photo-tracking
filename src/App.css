@@ -1,12 +1,15 @@
 .App {
   width: 100vw;
+  height: fit-content;
+  min-height: 100vh;
   text-align: center;
   display: flex;
+  /* grid-template-columns: 100vw;
+  grid-template-rows: 15% 1fr 5%; */
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: fit-content;
-  min-height: 100vh;
+  gap: 2rem;
   font-size: 2rem;
   overflow: hidden;
 }

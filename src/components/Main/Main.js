@@ -5,7 +5,7 @@ import SelectPhoto from '../SelectPhoto/SelectPhoto'
 import SelectRoll from '../SelectRoll/SelectRoll'
 import Settings from '../SelectPhoto/Settings/Settings'
 
-const Main = ({ data, currentRollId, setCurrentRollId, currentPhotoId, setCurrentPhotoId,handleSubmitAddRoll, addRollActive, setAddRollActive,addPhotoActive, setAddPhotoActive, handleSubmitAddPhoto, currentPhotoUrl }) => {
+const Main = ({ data, currentRollId, setCurrentRollId, currentPhotoId, setCurrentPhotoId,handleSubmitAddRoll, addRollActive, setAddRollActive,addPhotoActive, setAddPhotoActive, handleSubmitAddPhoto, currentPhotoUrl, handleNavigate }) => {
   return (
     <div className='main'>
       <SelectRoll 
@@ -31,6 +31,7 @@ const Main = ({ data, currentRollId, setCurrentRollId, currentPhotoId, setCurren
         currentPhotoId={currentPhotoId}
         currentPhotoUrl={currentPhotoUrl}
       />
+      <button onClick={() => handleNavigate('/manage-data')}>Manage Data</button>
     </div>
   )
 }

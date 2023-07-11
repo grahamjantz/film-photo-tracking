@@ -27,3 +27,7 @@ html {
   max-width: 100vw;
   overflow: hidden;
 }
+
+li {
+  list-style: none;
+}

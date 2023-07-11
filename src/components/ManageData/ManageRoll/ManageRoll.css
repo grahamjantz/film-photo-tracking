@@ -1,0 +1,68 @@
+.manage-roll {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.roll {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.roll ul {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.roll-photo-settings {
+    width: 80%;
+    padding: 1rem;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.roll-photo-settings div {
+    width: 100%;
+}
+
+.roll-photo-settings div:first-of-type {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.roll-photo-settings img {
+    width: 100%;
+}
+
+.roll-photo-settings h3 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.roll-photo-settings h4 {
+    font-weight: bolder;
+}
+
+.roll-photo-settings h4 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.roll-photo-settings svg:first-of-type {
+    color: green;
+}
+.roll-photo-settings svg:last-of-type {
+    color: red;
+}

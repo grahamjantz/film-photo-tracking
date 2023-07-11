@@ -47,8 +47,10 @@ const AddPhoto = ({ handleSubmitAddPhoto }) => {
             <option value='2' ></option>
             <option value='2.8'></option>
             <option value='4' ></option>
+            <option value='5.6' ></option>
             <option value='8' ></option>
             <option value='11' ></option>
+            <option value='16' ></option>
             <option value='22' ></option>
         </datalist>
 

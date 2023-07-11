@@ -19,6 +19,7 @@ film_rolls = [
         film: 'fujifilm_400_colour',
         lens: '50mm',
         id: generateId(),
+        date_created: '',
         photos: [
             {
                 subject: '',
