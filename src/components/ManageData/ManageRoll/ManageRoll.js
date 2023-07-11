@@ -3,14 +3,28 @@ import './ManageRoll.css'
 
 import { FaTrashCan } from 'react-icons/fa6'
 import { FaEdit } from 'react-icons/fa'
+import { useSearchParams } from 'react-router-dom'
 
-const ManageRoll = ({ data, currentRollId, currentPhotoUrl, handleDeletePhoto }) => {
+const ManageRoll = ({ data, currentRollId, currentPhotoUrl, handleDeletePhoto,setCurrentRollId }) => {
 
     const [localData, setLocalData] = useState(null)
     const [nameState, setNameState] = useState('')
     const [dateState, setDateState] = useState('')
 
+    
+    const [searchParams] = useSearchParams()
+    
+    // ==============GET SEARCH PARAMS==================== //
+
+    
+    
     useEffect(() => {
+        const rollId = searchParams.get('roll_id')
+    
+        if(rollId) {
+            setCurrentRollId(Number(rollId))
+        }
+
         if (data) {
             data.forEach(item=> {
                 if (item.id === currentRollId) {
@@ -34,7 +48,7 @@ const ManageRoll = ({ data, currentRollId, currentPhotoUrl, handleDeletePhoto })
                 setDateState(dateCreated)
             }
         }
-    },[data, currentRollId, localData])
+    },[data, currentRollId, localData, searchParams, setCurrentRollId])
 
   return (
     <div className='manage-roll'>

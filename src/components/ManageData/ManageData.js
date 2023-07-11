@@ -27,7 +27,7 @@ const ManageData = ({ data, handleNavigate, handleDeleteRoll }) => {
               return (
                 <li key={arrItem.id}>
                   <FaTrashCan size='30' onClick={() => handleDeleteRoll(arrItem)}/>
-                  <div onClick={() => handleNavigate(`/manage-roll?roll_id=${arrItem.id}`)}>
+                  <div onClick={() => handleNavigate(`/manage-roll?roll_id=${arrItem.id}`, arrItem.id)}>
                     <h5>{name}</h5>
                     <h6>{dateCreated}</h6>
                   </div>

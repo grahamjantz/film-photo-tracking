@@ -34,7 +34,7 @@ const SelectPhoto = ({ data, currentRollId, currentPhotoId, setCurrentPhotoId, a
                       className={photo.id === currentPhotoId ? 'active': ''}
                       onClick={() => setCurrentPhotoId(Number(photo.id))}
                     >
-                      #{localRollData.photos.indexOf(photo) + 1} (F{photo.f_stop} {photo.shutter_speed} {photo.exposure_comp}EF)
+                      #{localRollData.photos.indexOf(photo)} (F{photo.f_stop} {photo.shutter_speed} {photo.exposure_comp}EF)
                     </div>
                   )
                 })
@@ -42,7 +42,13 @@ const SelectPhoto = ({ data, currentRollId, currentPhotoId, setCurrentPhotoId, a
           }
         </div>
       </div>
-      {addPhotoActive === true ? <AddPhoto handleSubmitAddPhoto={handleSubmitAddPhoto} /> : ''}
+      {addPhotoActive === true ? (
+        <AddPhoto 
+          handleSubmitAddPhoto={handleSubmitAddPhoto} 
+          setAddPhotoActive={setAddPhotoActive}
+        /> 
+      )
+      : ''}
     </div>
   )
 }

@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import './AddRoll.css'
 
-const AddRoll = ({ handleSubmitAddRoll }) => {
+import { FaRegWindowClose } from 'react-icons/fa'
+
+const AddRoll = ({ handleSubmitAddRoll, setAddRollActive }) => {
 
     const [filmType, setFilmType] = useState('')
     const [lens, setLens] = useState('')
 
   return (
     <form className='add-roll' onSubmit={(e) => handleSubmitAddRoll(e, filmType, lens)}>
+        <FaRegWindowClose onClick={() => setAddRollActive(false)}/>
         <label htmlFor='film'>Film Type:</label>
         <input 
             type='text'

@@ -6,7 +6,7 @@ import { MdCameraRoll } from 'react-icons/md'
 const Header = ({ handleNavigate }) => {
   return (
     <header onClick={() => handleNavigate('/')}>
-      <h1><MdCameraRoll /> Film Catalogue</h1>
+      <h1><MdCameraRoll />Film Catalogue</h1>
     </header>
   )
 }

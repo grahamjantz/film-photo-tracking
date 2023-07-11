@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
-import { arrayUnion, doc, onSnapshot, serverTimestamp, updateDoc } from "firebase/firestore";
+import { arrayUnion, doc, onSnapshot, updateDoc } from "firebase/firestore";
 // import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 
 import db from './firebaseConfig.js'
 import Header from './components/Header/Header';
 import Main from './components/Main/Main'
-import Footer from './components/Footer/Footer';
-import { Route, Routes, useNavigate, useSearchParams } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import ManageData from './components/ManageData/ManageData';
 import ManageRoll from './components/ManageData/ManageRoll/ManageRoll';
 
@@ -26,7 +25,7 @@ function App() {
   const [addPhotoActive, setAddPhotoActive] = useState(false)
   const [currentPhotoUrl, setCurrentPhotoUrl] = useState('')
 
-  const [searchParams] = useSearchParams()
+  
 
 
   // ==============FETCH DATA FROM FIRESTORE DB==================== //
@@ -35,8 +34,12 @@ function App() {
       const unsub = onSnapshot(doc(db, "cameras", "pentax_me_super"), (doc) => {
         
         setData(doc.data().film_rolls)
-        setCurrentRollId(doc.data().film_rolls[0].id)
-        setCurrentPhotoId(doc.data().film_rolls[0].photos[0].id)
+        if (doc.data().film_rolls.length > 0) {
+          setCurrentRollId(doc.data().film_rolls[0].id)
+          if (doc.data().film_rolls[0].photos.length > 0) {
+            setCurrentPhotoId(doc.data().film_rolls[0].photos[0].id)
+          }
+        }
         
         
       })
@@ -44,18 +47,19 @@ function App() {
     }
     fetchData()
   },[])
+
   
   // ==============SET CURRENT PHOTO ID OF FIRST IMAGE FROM CURRENT ROLL==================== //
   useEffect(() => {
     data.forEach(arrItem => {
       if (arrItem.id === currentRollId) {
-        console.log(arrItem)
-        setCurrentPhotoId(arrItem.photos[0].id)
+        if (arrItem.photos.length > 0) {
+          setCurrentPhotoId(arrItem.photos[0].id)
+        }
       }
     })
   },[data, currentRollId])
   
-  console.log(currentRollId)
   
   // ==============FETCH CURRENT IMAGE FROM FIRESTORE STORAGE==================== //
   useEffect(() => {
@@ -73,40 +77,26 @@ function App() {
     setCurrentPhotoUrl('')
   },[currentPhotoId, currentRollId, setCurrentPhotoUrl])
   
-  // console.log(currentPhotoUrl)
   
   // ==============ADD NEW ROLL TO FIRESTORE DB==================== //
   const handleSubmitAddRoll = async (e, filmType, lens) => {
     e.preventDefault()
     
     let name = filmType.toLowerCase().replace(/ /g,"_")
-    // console.log(name)
     if (data) {
       if (filmType !=='' && lens !== '') {
         const payload = {
           film: name,
           lens: lens,
           id: generateId(),
-          // TODO: fix date_created for adding new roll to firebase
-          data_created: serverTimestamp(),
-          photos: [
-            {
-              subject: '',
-              id: generateId(),
-              f_stop: 1,
-              shutter_speed: '',
-              exposure_comp: '',
-              shooting_mode: ''
-          },
-          ]
+          date_created: new Date(),
+          photos: []
         }
+        data.push(payload)
         const docRef = doc(db, 'cameras', 'pentax_me_super') 
         await updateDoc(docRef, {
-          'film_rolls': arrayUnion(payload)
+          'film_rolls': data
         })
-        // console.log('added to firestore')
-        // const storage = getStorage()
-        // const imagesRef = ref(storage, `images/roll_${currentRollId}`)
         
       }
     }
@@ -120,14 +110,17 @@ function App() {
       data.forEach(item => {
         if (item.id === payload.id) {
 
-          payload = {...payload, "date_deleted": serverTimestamp()}
+          
+          payload = {...payload, "date_deleted": new Date()}
+          
+          const tempData = payload
 
           const index = data.indexOf(payload)
           data.splice(index, 1)
 
           const docRef = doc(db, 'cameras', 'pentax_me_super')
           updateDoc(docRef, {
-            '__deleted_rolls': arrayUnion(payload),
+            '__deleted_rolls': arrayUnion(tempData),
             'film_rolls': data
           })
         }
@@ -153,7 +146,14 @@ function App() {
     await updateDoc(docRef, {
       'film_rolls': data
     })
+    setAddPhotoActive(false)
     
+    //TODO: EVERY TIME AN IMAGE IS ADDED TO DB UPLOAD STOCK IMAGE TO STORAGE. 
+    //      THEN ADD FUNCTIONALITY TO UPLOAD ACTUAL IMAGE OF PHOTO
+    
+    // console.log('added to firestore')
+    // const storage = getStorage()
+    // const imagesRef = ref(storage, `images/roll_${currentRollId}`)
   }
 
   // ==============DELETE PHOTO IN CURRENT ROLL IN FIRESTORE DB==================== //
@@ -180,20 +180,9 @@ function App() {
   
   // ==============NAVIGATION HANDLER==================== //
   const navigate = useNavigate()
-
   const handleNavigate = (page) => {
     navigate(page)
   }
-
-  // ==============GET SEARCH PARAMS==================== //
-
-  useEffect(() => {
-    const rollId = searchParams.get('roll_id')
-
-    if(rollId) {
-      setCurrentRollId(rollId)
-    }
-  },[searchParams])
     
   return (
     <div className="App">
@@ -234,7 +223,6 @@ function App() {
           />
         }></Route>
       </Routes>
-      <Footer />
     </div>
   );
 }

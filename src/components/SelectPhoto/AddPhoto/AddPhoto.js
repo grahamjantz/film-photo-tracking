@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import './AddPhoto.css'
+
+import { FaRegWindowClose } from 'react-icons/fa'
+
 import { generateId } from '../../../App'
 
-const AddPhoto = ({ handleSubmitAddPhoto }) => {
+const AddPhoto = ({ handleSubmitAddPhoto, setAddPhotoActive }) => {
 
     const [subject, setSubject] = useState('')
     const [fStop, setFStop] = useState(2)
@@ -16,13 +19,14 @@ const AddPhoto = ({ handleSubmitAddPhoto }) => {
         handleSubmitAddPhoto(e, {
             id: generateId(),
             subject: subject,
-            fStop: fStop,
-            shutterSpeed: shutterSpeed,
-            exposureComp: exposureComp,
-            shootingMode: shootingMode
+            f_stop: fStop,
+            shutter_speed: shutterSpeed,
+            exposure_comp: exposureComp,
+            shooting_mode: shootingMode
         })
 
     }}>
+        <FaRegWindowClose onClick={() => setAddPhotoActive(false)}/>
         <label htmlFor='subject'>Subject:</label>
         <input 
             type='text'

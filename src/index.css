@@ -16,7 +16,7 @@ code {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border-radius: 3px;
+  border-radius: 10px;
 }
 
 html {
@@ -30,4 +30,18 @@ html {
 
 li {
   list-style: none;
+}
+
+:root {
+  --main-orange: #E8850D;
+  --main-blue: #085cd4;
+  --main-yellow: #ead777;
+  --main-brown: #181007;
+  --main-red: #e30613;
+  --second-yellow: #fab617;
+  --main-white: #ffffffd5;
+}
+
+hr {
+  color: var(--main-brown);  
 }

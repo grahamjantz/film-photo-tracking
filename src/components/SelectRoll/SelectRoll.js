@@ -48,7 +48,12 @@ const SelectRoll = ({ data, currentRollId, setCurrentRollId, handleSubmitAddRoll
             }
         </div>
       </div>
-      {addRollActive ? <AddRoll handleSubmitAddRoll={handleSubmitAddRoll}/> : ''}
+      {addRollActive ? (
+        <AddRoll 
+          handleSubmitAddRoll={handleSubmitAddRoll}
+          setAddRollActive={setAddRollActive}
+        />
+      ) : ''}
     </div>
   )
 }
