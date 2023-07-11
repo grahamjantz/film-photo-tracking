@@ -5,6 +5,14 @@
     font-weight: lighter;
 }
 
+.photo-settings {
+    padding: 1rem;
+}
+
+.photo-settings img {
+    width: 100%;
+}
+
 .photo-settings h3 {
     width: 100%;
     display: flex;

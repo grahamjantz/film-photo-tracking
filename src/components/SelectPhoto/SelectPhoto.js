@@ -4,7 +4,7 @@ import './SelectPhoto.css'
 import { FaPlusCircle } from 'react-icons/fa'
 import AddPhoto from './AddPhoto/AddPhoto'
 
-const SelectPhoto = ({ data, currentRollId, currentPhotoId, setCurrentPhotoId, addPhotoActive, setAddPhotoActive }) => {
+const SelectPhoto = ({ data, currentRollId, currentPhotoId, setCurrentPhotoId, addPhotoActive, setAddPhotoActive, handleSubmitAddPhoto }) => {
 
   const [localRollData, setLocalRollData] = useState({})
 
@@ -42,7 +42,7 @@ const SelectPhoto = ({ data, currentRollId, currentPhotoId, setCurrentPhotoId, a
           }
         </div>
       </div>
-      {addPhotoActive === true ? <AddPhoto /> : ''}
+      {addPhotoActive === true ? <AddPhoto handleSubmitAddPhoto={handleSubmitAddPhoto} /> : ''}
     </div>
   )
 }

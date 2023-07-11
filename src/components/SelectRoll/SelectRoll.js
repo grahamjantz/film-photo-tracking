@@ -7,7 +7,7 @@ import { generateId } from '../../App'
 import { FaPlusCircle } from 'react-icons/fa'
 import AddRoll from './AddRoll/AddRoll'
 
-const SelectRoll = ({ data, setCurrentRollId, handleSubmitAddRoll, addRollActive, setAddRollActive }) => {
+const SelectRoll = ({ data, currentRollId, setCurrentRollId, handleSubmitAddRoll, addRollActive, setAddRollActive }) => {
 
   const [localCurrentRoll, setLocalCurrentRoll] = useState('')
 
@@ -35,7 +35,7 @@ const SelectRoll = ({ data, setCurrentRollId, handleSubmitAddRoll, addRollActive
                 return(
                   <div 
                     key={generateId()} 
-                    className={roll.id === localCurrentRoll ? 'active' : ''}
+                    className={roll.id === localCurrentRoll || roll.id === currentRollId ? 'active' : ''}
                     onClick={() => handleChangeCurrentRoll(roll.id)}
                   >
                     {name}

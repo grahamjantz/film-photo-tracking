@@ -1,16 +1,28 @@
 import React, { useState } from 'react'
 import './AddPhoto.css'
+import { generateId } from '../../../App'
 
-const AddPhoto = () => {
+const AddPhoto = ({ handleSubmitAddPhoto }) => {
 
     const [subject, setSubject] = useState('')
     const [fStop, setFStop] = useState(2)
-    const [shutterSpeed, setShutterSpeed] = useState('')
-    const [exposureComp, setExposureComp] = useState('')
-    const [shootingMode, setShootingMode] = useState('')
+    const [shutterSpeed, setShutterSpeed] = useState('1/2000')
+    const [exposureComp, setExposureComp] = useState(1)
+    const [shootingMode, setShootingMode] = useState('Manual')
+    
 
   return (
-    <form className='add-photo'>
+    <form className='add-photo' onSubmit={(e) => {
+        handleSubmitAddPhoto(e, {
+            id: generateId(),
+            subject: subject,
+            fStop: fStop,
+            shutterSpeed: shutterSpeed,
+            exposureComp: exposureComp,
+            shootingMode: shootingMode
+        })
+
+    }}>
         <label htmlFor='subject'>Subject:</label>
         <input 
             type='text'
@@ -41,7 +53,7 @@ const AddPhoto = () => {
         </datalist>
 
         <label htmlFor='shutter-speed'>Shutter Speed:</label>
-        <select name='shutter-speed' onChange={(e) => setShutterSpeed(e.target.value)}>
+        <select name='shutter-speed' onChange={(e) => setShutterSpeed(e.target.value)} value={shutterSpeed}>
             <option value='1/2000' >1/2000</option>
             <option value='1/1000'>1/1000</option>
             <option value='1/500' >1/500</option>
@@ -79,9 +91,12 @@ const AddPhoto = () => {
             <option value='4'></option>
         </datalist>
 
-        <fieldset onChange={(e) => setShootingMode(e.target.value)}>
-            {shootingMode}
-            <legend>Shooting Mode:</legend>
+        <fieldset onChange={(e) => {
+            let word = e.target.value
+            const s = word.charAt(0).toUpperCase() + word.slice(1)
+            setShootingMode(s)
+        }}>
+            <legend>Shooting Mode: {shootingMode}</legend>
 
             <div>
                 <input type="radio" name="mode" value="auto"/>

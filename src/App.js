@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
-import { arrayUnion, doc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
+import { arrayUnion, doc, onSnapshot, updateDoc } from "firebase/firestore";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+
 
 import db from './firebaseConfig.js'
 import Header from './components/Header/Header';
@@ -19,9 +21,10 @@ function App() {
   const [currentPhotoId, setCurrentPhotoId] = useState(1)
   const [addRollActive, setAddRollActive] = useState(false)
   const [addPhotoActive, setAddPhotoActive] = useState(false)
+  const [currentPhotoUrl, setCurrentPhotoUrl] = useState('')
 
 
-  const dbRef = doc(db, 'cameras', 'pentax_me_super')
+  // const dbRef = doc(db, 'cameras', 'pentax_me_super')
   // setDoc(dbRef, {
   //   "film_rolls": [
   //     {
@@ -100,10 +103,27 @@ function App() {
         setCurrentPhotoId(doc.data().film_rolls[0].photos[0].id)
         
         
-      });
+      })
+      return unsub
     }
     fetchData()
   },[])
+
+  useEffect(() => {
+
+    const fetchData = async () => {
+      if (currentPhotoId !== '' && currentRollId !== '') {
+        const storage = getStorage();
+        const path = `images/roll_${currentRollId}/photo_${currentPhotoId}.jpeg`
+    
+        const url = await getDownloadURL(ref(storage, path))
+        setCurrentPhotoUrl(url)
+      }
+    }
+    fetchData()
+  },[currentPhotoId, currentRollId])
+
+  console.log(currentPhotoUrl)
 
   useEffect(() => {
     data.forEach(arrItem => {
@@ -134,9 +154,30 @@ function App() {
           'film_rolls': arrayUnion(payload)
         })
         console.log('added to firestore')
+        const storage = getStorage()
+        const imagesRef = ref(storage, `images/roll_${currentRollId}`)
+
       }
     }
     setAddRollActive(false)
+  }
+
+  const handleSubmitAddPhoto = async (e, payload) => {
+    e.preventDefault()
+
+    const docRef = doc(db, 'cameras', 'pentax_me_super')
+    
+    data.forEach(arrItem => {
+      if (arrItem.id === currentRollId) {
+        const dbPhotos = arrItem.photos
+        dbPhotos.push(payload)
+        arrItem.photos = dbPhotos
+      }
+    })
+    await updateDoc(docRef, {
+      'film_rolls': data
+    })
+
   }
 
   
@@ -154,6 +195,8 @@ function App() {
         handleSubmitAddRoll={handleSubmitAddRoll}
         addPhotoActive={addPhotoActive}
         setAddPhotoActive={setAddPhotoActive}
+        handleSubmitAddPhoto={handleSubmitAddPhoto}
+        currentPhotoUrl={currentPhotoUrl}
       />
       <Footer />
     </div>

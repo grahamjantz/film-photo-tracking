@@ -3,6 +3,7 @@
     height: fit-content;
     display: flex;
     flex-direction: column;
+    gap: 2rem;
 }
 .select-photo-container {
     width: 100%;

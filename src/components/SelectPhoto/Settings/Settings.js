@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Settings.css'
 
-const Settings = ({ data, currentRollId, currentPhotoId }) => {
+const Settings = ({ data, currentRollId, currentPhotoId, currentPhotoUrl }) => {
   
   const [localRollData, setLocalRollData ] = useState({})
 
@@ -25,6 +25,7 @@ const Settings = ({ data, currentRollId, currentPhotoId }) => {
             if (photo.id === currentPhotoId) {
               return (
                 <div className='photo-settings' key={photo.id}>
+                  <img src={currentPhotoUrl} alt=''/>
                   <h3><strong>{photo.subject}</strong></h3>
                   <h4>Aperture: <strong>F{photo.f_stop}</strong></h4>
                   <h4>Shutter Speed: <strong>{photo.shutter_speed}s</strong></h4>

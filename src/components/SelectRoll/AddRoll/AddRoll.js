@@ -1,20 +1,10 @@
 import React, { useState } from 'react'
 import './AddRoll.css'
 
-import { generateId } from '../../../App'
-
 const AddRoll = ({ handleSubmitAddRoll }) => {
 
     const [filmType, setFilmType] = useState('')
     const [lens, setLens] = useState('')
-
-    const tempData = {
-        film: '',
-        lens: '',
-        id: generateId(),
-        photos: []
-    }
-
 
   return (
     <form className='add-roll' onSubmit={(e) => handleSubmitAddRoll(e, filmType, lens)}>
